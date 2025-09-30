@@ -61,6 +61,12 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            background: rgba(255, 255, 255, 0);
+            transition: all 0.4s ease;
+            padding: 2rem 0;
+        }
+
+        header.scrolled {
             background: var(--white);
             box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
             padding: 1.5rem 0;
@@ -83,6 +89,18 @@
             color: var(--black);
             text-decoration: none;
             letter-spacing: -0.5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.7;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
         }
 
         .nav-link {
@@ -90,18 +108,189 @@
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
+            letter-spacing: 0.3px;
             transition: color 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        header:not(.scrolled) .nav-link {
+            color: var(--dark-gray);
         }
 
         .nav-link:hover {
             color: var(--accent);
         }
 
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-left: 0.35rem;
+            margin-bottom: 2px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown-arrow {
+            transform: rotate(-45deg) translateY(-2px);
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 280px;
+            padding: 0.75rem 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 1rem;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background: var(--off-white);
+            border-left-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .dropdown-item-icon {
+            margin-right: 0.75rem;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .dropdown-item-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 127, 31, 0.2);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--dark-gray);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
         /* Main Content */
         .main-content {
-            padding-top: 8rem;
+            padding-top: 10rem;
             min-height: 100vh;
-            background: linear-gradient(135deg, #FFF5ED 0%, #FFFFFF 100%);
+            background: linear-gradient(135deg,
+                rgba(255, 127, 31, 0.03) 0%,
+                rgba(255, 127, 31, 0.01) 25%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 127, 31, 0.01) 75%,
+                rgba(255, 127, 31, 0.03) 100%
+            );
+            position: relative;
+        }
+
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 400px;
+            background: radial-gradient(ellipse at top center,
+                rgba(255, 127, 31, 0.05) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
         }
 
         .container {
@@ -942,6 +1131,13 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
             .search-form {
                 flex-direction: column;
             }
@@ -1036,10 +1232,85 @@
 </head>
 <body>
     <!-- Navigation -->
-    <header>
+    <header id="header">
         <div class="nav-container">
             <a href="index.html" class="logo">IRONJI</a>
-            <a href="index.html" class="nav-link">← Back to Home</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html#services" class="nav-link">
+                            Services
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                                </span> Products Distribution
+                            </a>
+                            <a href="index.html#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </span> Inter-warehouse Transport
+                            </a>
+                            <a href="index.html#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m-1 1l-4.2 4.2m13.2-5.2h-6m-6 0H1m13.2 5.2l-4.2-4.2m-1-1L4.8 4.8"/></svg>
+                                </span> Custom Solutions
+                            </a>
+                            <a href="index.html#schedule" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </span> Schedule & Prices
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="track.html" class="nav-link">Track Shipment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#quote" class="nav-link">Get Instant Quotation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Company
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html#about" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                </span> About Us
+                            </a>
+                            <a href="index.html#profile" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+                                </span> Company Profile
+                            </a>
+                            <a href="index.html#news" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><line x1="12" y1="7" x2="17" y2="7"/><line x1="12" y1="11" x2="17" y2="11"/></svg>
+                                </span> News & Insights
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tel:+250784635871" class="nav-link">
+                            <span class="dropdown-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </span> Emergency
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contact" class="nav-cta">Contact Us</a>
+                    </li>
+                </ul>
+                <button class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
         </div>
     </header>
 
@@ -1105,6 +1376,16 @@
     </main>
 
     <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Mock data for demonstration
         const mockShipments = {
             'TRK-2024-001234': {
