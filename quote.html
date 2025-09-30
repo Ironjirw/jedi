@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get an instant quotation for your logistics needs with Ironji - Rwanda's Premier Logistics Partner">
+    <title>Get Instant Quotation — Ironji</title>
+
+    <style>
+        @font-face {
+            font-family: 'Avenir';
+            src: local('Avenir Next'), local('Avenir'), local('Century Gothic'), local('AppleGothic'), local('sans-serif');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #FF7F1F;
+            --accent-dark: #E56710;
+            --accent-light: #FFB880;
+            --black: #000000;
+            --dark-gray: #1C1C1C;
+            --gray: #666666;
+            --light-gray: #999999;
+            --off-white: #F8F8F8;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --error: #EF4444;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            color: var(--dark-gray);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation - Matching track.html */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0);
+            transition: all 0.4s ease;
+            padding: 2rem 0;
+        }
+
+        header.scrolled {
+            background: var(--white);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+            padding: 1.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.7;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        header:not(.scrolled) .nav-link {
+            color: var(--dark-gray);
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-left: 0.35rem;
+            margin-bottom: 2px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown-arrow {
+            transform: rotate(-45deg) translateY(-2px);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 280px;
+            padding: 0.75rem 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 1rem;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background: var(--off-white);
+            border-left-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .dropdown-item-icon {
+            margin-right: 0.75rem;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .dropdown-item-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 127, 31, 0.2);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--dark-gray);
+            transition: all 0.3s ease;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 10rem;
+            min-height: 100vh;
+            background: linear-gradient(135deg,
+                rgba(255, 127, 31, 0.03) 0%,
+                rgba(255, 127, 31, 0.01) 25%,
+                rgba(255, 255, 255, 0) 50%,
+                rgba(255, 127, 31, 0.01) 75%,
+                rgba(255, 127, 31, 0.03) 100%
+            );
+            position: relative;
+        }
+
+        .main-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 400px;
+            background: radial-gradient(ellipse at top center,
+                rgba(255, 127, 31, 0.05) 0%,
+                transparent 70%
+            );
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-tag {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--off-white);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 127, 31, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-icon svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        .required {
+            color: var(--error);
+            margin-left: 2px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            font-size: 1rem;
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 127, 31, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23666666' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.25rem center;
+            padding-right: 3rem;
+        }
+
+        .form-hint {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin-top: 0.25rem;
+        }
+
+        /* Radio Group */
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            position: relative;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-label {
+            display: block;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-label {
+            background: rgba(255, 127, 31, 0.05);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .radio-label:hover {
+            border-color: rgba(255, 127, 31, 0.3);
+        }
+
+
+        /* Submit Button */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(255, 127, 31, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 127, 31, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--off-white);
+            color: var(--dark-gray);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--success);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Loading State */
+        .loading {
+            display: none;
+        }
+
+        .loading.active {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .form-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .radio-group {
+                flex-direction: column;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same as track.html) -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">IRONJI</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html#services" class="nav-link">
+                            Services
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                                </span> Products Distribution
+                            </a>
+                            <a href="index.html#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </span> Inter-warehouse Transport
+                            </a>
+                            <a href="index.html#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m-1 1l-4.2 4.2m13.2-5.2h-6m-6 0H1m13.2 5.2l-4.2-4.2m-1-1L4.8 4.8"/></svg>
+                                </span> Custom Solutions
+                            </a>
+                            <a href="index.html#schedule" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </span> Schedule & Prices
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="track.html" class="nav-link">Track Shipment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="quote.html" class="nav-link">Get Instant Quotation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Company
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="index.html#about" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                </span> About Us
+                            </a>
+                            <a href="index.html#profile" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+                                </span> Company Profile
+                            </a>
+                            <a href="index.html#news" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><line x1="12" y1="7" x2="17" y2="7"/><line x1="12" y1="11" x2="17" y2="11"/></svg>
+                                </span> News & Insights
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tel:+250784635871" class="nav-link">
+                            <span class="dropdown-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </span> Emergency
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html#contact" class="nav-cta">Contact Us</a>
+                    </li>
+                </ul>
+                <button class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">Get Your Custom Quote</div>
+                <h1 class="page-title">Instant Quotation</h1>
+                <p class="page-subtitle">
+                    Fill in the details below and we'll provide you with a competitive quote within minutes
+                </p>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                Thank you! Your quote request has been submitted successfully. We'll contact you shortly.
+            </div>
+
+            <!-- Form Container -->
+            <div class="form-container">
+                <form id="quoteForm">
+                    <!-- Contact Information Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <span class="section-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </span>
+                            Contact Information
+                        </h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Full Name <span class="required">*</span>
+                                </label>
+                                <input type="text" class="form-input" name="name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Email Address <span class="required">*</span>
+                                </label>
+                                <input type="email" class="form-input" name="email" required placeholder="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Phone Number <span class="required">*</span>
+                                </label>
+                                <input type="tel" class="form-input" name="phone" required placeholder="+250 784 000 000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Business Name <span class="form-hint">(Optional)</span>
+                                </label>
+                                <input type="text" class="form-input" name="business" placeholder="Company Ltd">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipment Details Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <span class="section-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </span>
+                            Shipment Details
+                        </h2>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label class="form-label">
+                                    Pickup Location <span class="required">*</span>
+                                </label>
+                                <input type="text" class="form-input" name="pickup_location" required placeholder="Enter pickup address or location">
+                            </div>
+                            <div class="form-group full-width">
+                                <label class="form-label">
+                                    Delivery Location <span class="required">*</span>
+                                </label>
+                                <input type="text" class="form-input" name="delivery_location" required placeholder="Enter delivery address or location">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cargo Information Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <span class="section-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                </svg>
+                            </span>
+                            Cargo Information
+                        </h2>
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label class="form-label">
+                                    Cargo Description <span class="required">*</span>
+                                </label>
+                                <textarea class="form-textarea" name="cargo_description" required
+                                    placeholder="Describe your cargo (e.g., type of goods, quantity, weight, dimensions)"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Truck Type <span class="form-hint">(Optional)</span>
+                                </label>
+                                <select class="form-select" name="truck_type">
+                                    <option value="">Select truck type</option>
+                                    <option value="dyna_3_5">Dyna (3.5 MT)</option>
+                                    <option value="daihatsu_5">Daihatsu (5 MT)</option>
+                                    <option value="lifan_500kg">Lifan (500 Kg)</option>
+                                    <option value="pickup_1mt">Pickup (1 MT)</option>
+                                    <option value="fuso_ben_7_5">Fuso Ben (7.5 MT)</option>
+                                    <option value="fuso_long_10">Fuso Long (10 MT)</option>
+                                    <option value="actros_35">Actros (35 MT)</option>
+                                    <option value="flatbed_35">Flatbed (35 MT)</option>
+                                    <option value="crane_dyna_3_5">Crane Truck Dyna (3.5 MT)</option>
+                                    <option value="crane_fuso_10">Crane Truck Fuso (10 MT)</option>
+                                    <option value="crane_flatbed_35">Crane Truck Flatbed (35 MT)</option>
+                                    <option value="petrol_35000l">Petrol Truck (35000 L)</option>
+                                    <option value="motorbike_50kg">Motorbike (50 Kg)</option>
+                                    <option value="actros_benz_35">Actros Benz (35 MT)</option>
+                                    <option value="chacman_35">Chacman (35 MT)</option>
+                                    <option value="dyna_200_3">Dyna-200 (3 MT)</option>
+                                    <option value="dyna_300_3_5">Dyna-300 (3.5 MT)</option>
+                                    <option value="dyna_long_5">Dyna Long (5 MT)</option>
+                                    <option value="pickup_hilux_700kg">Pick up Hilux (700 Kg)</option>
+                                    <option value="vigor_600kg">Vigor (600 Kg)</option>
+                                    <option value="refrigerated_2">Refrigerated Truck (2 MT)</option>
+                                    <option value="water_8000l">Water Truck (8000 L)</option>
+                                    <option value="howo_40">HOWO (40 MT)</option>
+                                    <option value="forklift_5">Forklift (5 MT)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Requirements Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <span class="section-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </span>
+                            Delivery Requirements
+                        </h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Preferred Pickup Date
+                                </label>
+                                <input type="date" class="form-input" name="pickup_date" min="" id="pickupDate">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Preferred Pickup Time
+                                </label>
+                                <select class="form-select" name="pickup_time">
+                                    <option value="">Select time</option>
+                                    <option value="morning">Morning (6:00 - 12:00)</option>
+                                    <option value="afternoon">Afternoon (12:00 - 18:00)</option>
+                                    <option value="evening">Evening (18:00 - 21:00)</option>
+                                    <option value="flexible">Flexible</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Estimated Weight
+                                </label>
+                                <input type="text" class="form-input" name="weight" placeholder="e.g., 500 Kg, 2 MT">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Number of Items
+                                </label>
+                                <input type="number" class="form-input" name="items_count" placeholder="e.g., 10 boxes">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Special Requirements Section -->
+                    <div class="form-section">
+                        <h2 class="section-title">
+                            <span class="section-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </span>
+                            Special Requirements
+                        </h2>
+                        <div class="form-group full-width">
+                            <label class="form-label">
+                                Additional Requirements <span class="form-hint">(Optional)</span>
+                            </label>
+                            <textarea class="form-textarea" name="special_requirements"
+                                placeholder="Any special handling instructions, insurance needs, or specific requirements"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        <button type="submit" class="btn btn-primary">
+                            Get Quote
+                            <span class="loading" id="loading"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Set minimum date to today for pickup date
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('pickupDate').setAttribute('min', today);
+
+        // Form submission
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Show loading state
+            document.getElementById('loading').classList.add('active');
+
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide loading state
+                document.getElementById('loading').classList.remove('active');
+
+                // Show success message
+                document.getElementById('successMessage').classList.add('show');
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Reset form
+                this.reset();
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('successMessage').classList.remove('show');
+                }, 5000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
