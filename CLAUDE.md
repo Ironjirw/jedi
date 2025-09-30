@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is the Ironji website - a single-page marketing website for Rwanda's logistics company. The site is built as a static HTML file with inline CSS and JavaScript.
 
 **Company Info:**
-- Ironji: Rwanda's Premier Logistics Partner since 2014
+- Ironji: Rwanda's Premier Logistics Partner since 2018
 - Services: Distribution Network, Warehouse Transport, Express Delivery
 - Contact: ironji.sales@gmail.com, +250 784 635 871
 
