@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Track your shipment with Ironji - Real-time tracking for all your logistics needs">
+    <title>Track Shipment — Ironji</title>
+
+    <style>
+        @font-face {
+            font-family: 'Avenir';
+            src: local('Avenir Next'), local('Avenir'), local('Century Gothic'), local('AppleGothic'), local('sans-serif');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #FF7F1F;
+            --accent-dark: #E56710;
+            --accent-light: #FFB880;
+            --black: #000000;
+            --dark-gray: #1C1C1C;
+            --gray: #666666;
+            --light-gray: #999999;
+            --off-white: #F8F8F8;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            color: var(--dark-gray);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+            padding: 1.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 8rem;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFF5ED 0%, #FFFFFF 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .page-tag {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 3rem;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .search-btn {
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 127, 31, 0.3);
+        }
+
+        .search-hint {
+            font-size: 0.875rem;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        /* Single Shipment View */
+        .shipment-detail {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .shipment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .shipment-id {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .shipment-date {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.in-transit {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--info);
+        }
+
+        .status-badge.delivered {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+
+        .status-badge.pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+
+        /* Route Info */
+        .route-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .route-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .route-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 127, 31, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .route-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .route-details h4 {
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.25rem;
+        }
+
+        .route-details p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* ETA Section */
+        .eta-section {
+            background: rgba(255, 127, 31, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .eta-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .eta-time {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Progress Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 23px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 3px solid var(--gray);
+        }
+
+        .timeline-item.active .timeline-dot {
+            border-color: var(--accent);
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(255, 127, 31, 0.2);
+        }
+
+        .timeline-item.completed .timeline-dot {
+            border-color: var(--success);
+            background: var(--success);
+        }
+
+        .timeline-content {
+            background: var(--off-white);
+            padding: 1.25rem;
+            border-radius: 8px;
+        }
+
+        .timeline-item.active .timeline-content {
+            background: rgba(255, 127, 31, 0.05);
+            border: 1px solid rgba(255, 127, 31, 0.2);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-time {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            font-size: 0.95rem;
+            color: var(--dark-gray);
+        }
+
+        /* Batch Results (Multiple Shipments) */
+        .batch-header {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .batch-id {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .batch-info {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .shipments-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .shipment-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .shipment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .shipment-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .shipment-card-id {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .shipment-card-body {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .shipment-info-item h5 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .shipment-info-item p {
+            font-size: 1rem;
+            color: var(--black);
+            font-weight: 500;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--white);
+            border-radius: 12px;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.3;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-description {
+            color: var(--gray);
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            border: 4px solid rgba(255, 127, 31, 0.2);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .shipment-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .route-info {
+                grid-template-columns: 1fr;
+            }
+
+            .shipment-card-body {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">IRONJI</a>
+            <a href="index.html" class="nav-link">← Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="page-tag">Track Your Shipment</div>
+                <h1 class="page-title">Where's My Package?</h1>
+                <p class="page-subtitle">
+                    Enter your tracking number or batch ID to see real-time updates on your shipment
+                </p>
+            </div>
+
+            <!-- Search Section -->
+            <div class="search-section">
+                <form class="search-form" id="trackingForm">
+                    <input
+                        type="text"
+                        class="search-input"
+                        id="trackingInput"
+                        placeholder="Enter tracking number (e.g., TRK-2024-001234) or batch ID (e.g., BATCH-2024-056)"
+                        required
+                    />
+                    <button type="submit" class="search-btn">Track Shipment</button>
+                </form>
+                <p class="search-hint">
+                    💡 Tip: Use batch ID to view multiple shipments at once
+                </p>
+            </div>
+
+            <!-- Loading State -->
+            <div class="loading" id="loadingState" style="display: none;">
+                <div class="spinner"></div>
+                <p>Searching for your shipment...</p>
+            </div>
+
+            <!-- Single Shipment Results -->
+            <div class="results-section" id="singleShipmentResults">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <!-- Batch Results -->
+            <div class="results-section" id="batchResults">
+                <!-- Will be populated by JavaScript -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+                <h3 class="empty-title">No Shipment Found</h3>
+                <p class="empty-description">
+                    We couldn't find any shipment with that tracking number or batch ID.<br>
+                    Please check your number and try again.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mock data for demonstration
+        const mockShipments = {
+            'TRK-2024-001234': {
+                type: 'single',
+                trackingNumber: 'TRK-2024-001234',
+                status: 'in-transit',
+                createdDate: '2024-09-28 08:30 AM',
+                from: {
+                    location: 'Kigali Warehouse',
+                    address: 'KN 5 Ave, Kigali'
+                },
+                to: {
+                    location: 'Musanze Distribution Center',
+                    address: 'RN4, Musanze'
+                },
+                eta: 'Today, 4:30 PM',
+                timeline: [
+                    {
+                        title: 'Package Delivered',
+                        time: '',
+                        description: 'Package will be delivered to recipient',
+                        status: 'pending'
+                    },
+                    {
+                        title: 'Out for Delivery',
+                        time: 'Today, 2:15 PM',
+                        description: 'Package is on the delivery vehicle',
+                        status: 'active'
+                    },
+                    {
+                        title: 'Arrived at Musanze Hub',
+                        time: 'Today, 11:45 AM',
+                        description: 'Package arrived at destination hub',
+                        status: 'completed'
+                    },
+                    {
+                        title: 'In Transit',
+                        time: 'Today, 9:30 AM',
+                        description: 'Package departed from Kigali',
+                        status: 'completed'
+                    },
+                    {
+                        title: 'Package Picked Up',
+                        time: '2024-09-28 08:30 AM',
+                        description: 'Package received at Kigali Warehouse',
+                        status: 'completed'
+                    }
+                ]
+            },
+            'TRK-2024-001235': {
+                type: 'single',
+                trackingNumber: 'TRK-2024-001235',
+                status: 'delivered',
+                createdDate: '2024-09-27 10:00 AM',
+                from: {
+                    location: 'Kigali Warehouse',
+                    address: 'KN 5 Ave, Kigali'
+                },
+                to: {
+                    location: 'Huye Office',
+                    address: 'UR Campus, Huye'
+                },
+                eta: 'Delivered',
+                timeline: [
+                    {
+                        title: 'Package Delivered',
+                        time: '2024-09-27 3:45 PM',
+                        description: 'Package delivered and signed by John Doe',
+                        status: 'completed'
+                    },
+                    {
+                        title: 'Out for Delivery',
+                        time: '2024-09-27 1:30 PM',
+                        description: 'Package is on the delivery vehicle',
+                        status: 'completed'
+                    },
+                    {
+                        title: 'Arrived at Huye Hub',
+                        time: '2024-09-27 11:15 AM',
+                        description: 'Package arrived at destination hub',
+                        status: 'completed'
+                    },
+                    {
+                        title: 'Package Picked Up',
+                        time: '2024-09-27 10:00 AM',
+                        description: 'Package received at Kigali Warehouse',
+                        status: 'completed'
+                    }
+                ]
+            },
+            'BATCH-2024-056': {
+                type: 'batch',
+                batchId: 'BATCH-2024-056',
+                totalShipments: 5,
+                shipments: [
+                    {
+                        trackingNumber: 'TRK-2024-001234',
+                        status: 'in-transit',
+                        from: 'Kigali',
+                        to: 'Musanze',
+                        eta: 'Today, 4:30 PM'
+                    },
+                    {
+                        trackingNumber: 'TRK-2024-001235',
+                        status: 'delivered',
+                        from: 'Kigali',
+                        to: 'Huye',
+                        eta: 'Delivered'
+                    },
+                    {
+                        trackingNumber: 'TRK-2024-001236',
+                        status: 'in-transit',
+                        from: 'Kigali',
+                        to: 'Rubavu',
+                        eta: 'Tomorrow, 10:00 AM'
+                    },
+                    {
+                        trackingNumber: 'TRK-2024-001237',
+                        status: 'pending',
+                        from: 'Kigali',
+                        to: 'Rusizi',
+                        eta: 'Tomorrow, 2:00 PM'
+                    },
+                    {
+                        trackingNumber: 'TRK-2024-001238',
+                        status: 'in-transit',
+                        from: 'Kigali',
+                        to: 'Nyagatare',
+                        eta: 'Tomorrow, 11:30 AM'
+                    }
+                ]
+            }
+        };
+
+        // Form submission
+        document.getElementById('trackingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('trackingInput').value.trim().toUpperCase();
+            searchShipment(input);
+        });
+
+        function searchShipment(trackingId) {
+            // Hide all sections
+            document.getElementById('singleShipmentResults').classList.remove('active');
+            document.getElementById('batchResults').classList.remove('active');
+            document.getElementById('emptyState').style.display = 'none';
+
+            // Show loading
+            document.getElementById('loadingState').style.display = 'block';
+
+            // Simulate API call
+            setTimeout(() => {
+                document.getElementById('loadingState').style.display = 'none';
+
+                const result = mockShipments[trackingId];
+
+                if (!result) {
+                    document.getElementById('emptyState').style.display = 'block';
+                    return;
+                }
+
+                if (result.type === 'single') {
+                    displaySingleShipment(result);
+                } else if (result.type === 'batch') {
+                    displayBatchResults(result);
+                }
+            }, 1000);
+        }
+
+        function displaySingleShipment(shipment) {
+            const container = document.getElementById('singleShipmentResults');
+
+            const statusText = shipment.status === 'delivered' ? 'Delivered' :
+                             shipment.status === 'in-transit' ? 'In Transit' : 'Pending';
+
+            container.innerHTML = `
+                <div class="shipment-detail">
+                    <div class="shipment-header">
+                        <div>
+                            <div class="shipment-id">Tracking #${shipment.trackingNumber}</div>
+                            <div class="shipment-date">Created: ${shipment.createdDate}</div>
+                        </div>
+                        <span class="status-badge ${shipment.status}">${statusText}</span>
+                    </div>
+
+                    <div class="route-info">
+                        <div class="route-point">
+                            <div class="route-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </div>
+                            <div class="route-details">
+                                <h4>From</h4>
+                                <p>${shipment.from.location}</p>
+                                <p style="font-size: 0.875rem; color: var(--light-gray);">${shipment.from.address}</p>
+                            </div>
+                        </div>
+
+                        <div class="route-point">
+                            <div class="route-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                    <circle cx="12" cy="10" r="3"/>
+                                </svg>
+                            </div>
+                            <div class="route-details">
+                                <h4>To</h4>
+                                <p>${shipment.to.location}</p>
+                                <p style="font-size: 0.875rem; color: var(--light-gray);">${shipment.to.address}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${shipment.status !== 'delivered' ? `
+                    <div class="eta-section">
+                        <div class="eta-label">Estimated Arrival</div>
+                        <div class="eta-time">${shipment.eta}</div>
+                    </div>
+                    ` : ''}
+
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Tracking History</h3>
+                    <div class="timeline">
+                        ${shipment.timeline.map(item => `
+                            <div class="timeline-item ${item.status}">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title">${item.title}</div>
+                                    ${item.time ? `<div class="timeline-time">${item.time}</div>` : ''}
+                                    <div class="timeline-description">${item.description}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            container.classList.add('active');
+        }
+
+        function displayBatchResults(batch) {
+            const container = document.getElementById('batchResults');
+
+            container.innerHTML = `
+                <div class="batch-header">
+                    <div class="batch-id">Batch #${batch.batchId}</div>
+                    <div class="batch-info">${batch.totalShipments} shipments in this batch</div>
+                </div>
+
+                <div class="shipments-grid">
+                    ${batch.shipments.map(shipment => {
+                        const statusText = shipment.status === 'delivered' ? 'Delivered' :
+                                         shipment.status === 'in-transit' ? 'In Transit' : 'Pending';
+                        return `
+                            <div class="shipment-card" onclick="searchShipment('${shipment.trackingNumber}')">
+                                <div class="shipment-card-header">
+                                    <div class="shipment-card-id">${shipment.trackingNumber}</div>
+                                    <span class="status-badge ${shipment.status}">${statusText}</span>
+                                </div>
+                                <div class="shipment-card-body">
+                                    <div class="shipment-info-item">
+                                        <h5>From</h5>
+                                        <p>${shipment.from}</p>
+                                    </div>
+                                    <div class="shipment-info-item">
+                                        <h5>To</h5>
+                                        <p>${shipment.to}</p>
+                                    </div>
+                                    <div class="shipment-info-item">
+                                        <h5>ETA</h5>
+                                        <p>${shipment.eta}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            container.classList.add('active');
+        }
+    </script>
+</body>
+</html>
