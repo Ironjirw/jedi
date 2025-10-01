@@ -6,7 +6,9 @@
 // Load header component
 async function loadHeader() {
     try {
-        const response = await fetch('/components/header.html');
+        // Add timestamp to prevent caching during development
+        const timestamp = new Date().getTime();
+        const response = await fetch(`/components/header.html?v=${timestamp}`);
         const html = await response.text();
         const headerPlaceholder = document.getElementById('header-placeholder');
         if (headerPlaceholder) {
@@ -20,7 +22,9 @@ async function loadHeader() {
 // Load footer component
 async function loadFooter() {
     try {
-        const response = await fetch('/components/footer.html');
+        // Add timestamp to prevent caching during development
+        const timestamp = new Date().getTime();
+        const response = await fetch(`/components/footer.html?v=${timestamp}`);
         const html = await response.text();
         const footerPlaceholder = document.getElementById('footer-placeholder');
         if (footerPlaceholder) {

@@ -632,6 +632,146 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+
+        /* Footer Styles */
+        footer {
+            background: var(--black, #000000);
+            color: var(--white, #FFFFFF);
+            padding: 5rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent, #FF7F1F);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent, #FF7F1F);
+            border-color: var(--accent, #FF7F1F);
+            color: var(--white, #FFFFFF);
+        }
+
+        /* Mobile Click-to-Call Button */
+        .mobile-call-btn {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--accent, #FF7F1F);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(255, 127, 31, 0.4);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-decoration: none;
+            color: var(--white, #FFFFFF);
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(255, 127, 31, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(255, 127, 31, 0.7);
+            }
+        }
+
+        /* Responsive footer styles */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .mobile-call-btn {
+                display: flex;
+            }
+        }
     </style>
 </head>
 <body>
@@ -798,49 +938,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>About Ironji</h3>
-                <p>Rwanda's Premier Logistics Partner since 2014. We provide reliable transport and distribution solutions across the country.</p>
-            </div>
-
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <div class="footer-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About Us</a>
-                    <a href="profile.html">Company Profile</a>
-                    <a href="track.html">Track Shipment</a>
-                    <a href="quote.html">Get Quote</a>
-                </div>
-            </div>
-
-            <div class="footer-column">
-                <h3>Services</h3>
-                <div class="footer-links">
-                    <a href="#">Distribution Network</a>
-                    <a href="#">Warehouse Transport</a>
-                    <a href="#">Express Delivery</a>
-                    <a href="#">Logistics Solutions</a>
-                </div>
-            </div>
-
-            <div class="footer-column">
-                <h3>Contact Info</h3>
-                <p>Fairview Building, Kigali, 4th Floor<br>
-                Opposite Lemigo Hotel<br><br>
-                📧 ironji.sales@gmail.com<br>
-                📱 +250 784 635 871</p>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Ironji Trade Ltd. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
         // Header scroll effect

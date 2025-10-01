@@ -8,7 +8,7 @@ This is the Ironji website - a single-page marketing website for Rwanda's logist
 
 **Company Info:**
 - Ironji: Rwanda's Premier Logistics Partner since 2018
-- Services: Distribution Network, Warehouse Transport, Express Delivery
+- Services: Distribution Network, Warehouse Transport, On Demand Transport
 - Contact: ironji.sales@gmail.com, +250 784 635 871
 
 ## Development
