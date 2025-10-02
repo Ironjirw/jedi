@@ -347,7 +347,7 @@
             border-radius: 20px;
             padding: 2rem;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
             gap: 1.5rem;
             align-items: end;
         }
@@ -853,6 +853,12 @@
         }
 
         /* Responsive */
+        @media (max-width: 1200px) {
+            .search-box {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
         @media (max-width: 1024px) {
             .search-box {
                 grid-template-columns: 1fr 1fr;
@@ -1037,6 +1043,23 @@
                         <option value="huye">Huye</option>
                         <option value="rusizi">Rusizi</option>
                         <option value="nyagatare">Nyagatare</option>
+                    </select>
+                </div>
+                <div class="search-field">
+                    <label>
+                        <svg viewBox="0 0 24 24">
+                            <rect x="1" y="3" width="15" height="13"/>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                        Truck Type
+                    </label>
+                    <select id="truck-type">
+                        <option value="">All trucks</option>
+                        <option value="dyna">Dyna</option>
+                        <option value="fuso">Fuso</option>
+                        <option value="isuzu">Isuzu</option>
                     </select>
                 </div>
                 <div class="search-field">
@@ -1384,6 +1407,7 @@
         function searchRoutes() {
             const origin = document.getElementById('origin').value.toLowerCase();
             const destination = document.getElementById('destination').value.toLowerCase();
+            const truckType = document.getElementById('truck-type').value.toLowerCase();
             const timeSlot = document.getElementById('time-slot').value;
 
             let filtered = allRoutes;
@@ -1394,6 +1418,10 @@
 
             if (destination) {
                 filtered = filtered.filter(route => route.destination === destination);
+            }
+
+            if (truckType) {
+                filtered = filtered.filter(route => route.truckType.toLowerCase() === truckType);
             }
 
             if (timeSlot) {
