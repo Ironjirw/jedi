@@ -722,23 +722,16 @@
             position: relative;
         }
 
-        .rwanda-map-svg {
+        .coverage-map-image {
             width: 100%;
             height: auto;
+            border-radius: 15px;
             filter: drop-shadow(0 10px 40px rgba(255, 127, 31, 0.3));
+            transition: transform 0.3s ease;
         }
 
-        .province-region {
-            fill: rgba(255, 127, 31, 0.1);
-            stroke: var(--accent);
-            stroke-width: 2;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .province-region:hover {
-            fill: rgba(255, 127, 31, 0.3);
-            stroke-width: 3;
+        .coverage-map-image:hover {
+            transform: scale(1.02);
         }
 
         .coverage-pulse {
@@ -1325,30 +1318,7 @@
                         <!-- Map Visual -->
                         <div class="map-visual">
                             <div class="rwanda-outline">
-                                <svg class="rwanda-map-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-                                    <!-- Simplified Rwanda outline with provinces -->
-                                    <!-- Northern Province -->
-                                    <path class="province-region" d="M 180 50 L 220 50 L 250 80 L 240 120 L 200 110 L 160 100 L 150 70 Z" data-province="Northern"/>
-
-                                    <!-- Kigali Province (center) -->
-                                    <circle class="province-region" cx="200" cy="180" r="30" data-province="Kigali"/>
-                                    <circle class="coverage-pulse" cx="200" cy="180" r="5" style="left: 50%; top: 36%; transform: translate(-50%, -50%);"/>
-
-                                    <!-- Eastern Province -->
-                                    <path class="province-region" d="M 230 150 L 320 140 L 340 180 L 330 250 L 280 240 L 240 220 L 230 180 Z" data-province="Eastern"/>
-
-                                    <!-- Southern Province -->
-                                    <path class="province-region" d="M 160 210 L 250 230 L 260 300 L 240 360 L 180 380 L 120 350 L 130 280 L 150 240 Z" data-province="Southern"/>
-
-                                    <!-- Western Province -->
-                                    <path class="province-region" d="M 60 140 L 150 150 L 160 200 L 140 260 L 120 340 L 70 320 L 50 240 L 60 180 Z" data-province="Western"/>
-
-                                    <!-- Connection lines -->
-                                    <line x1="200" y1="180" x2="180" y2="80" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
-                                    <line x1="200" y1="180" x2="280" y2="190" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
-                                    <line x1="200" y1="180" x2="200" y2="300" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
-                                    <line x1="200" y1="180" x2="100" y2="220" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
-                                </svg>
+                                <img src="assets/Rwanda_Coverage_Map.png" alt="Rwanda Coverage Map - All 30 Districts" class="coverage-map-image">
                             </div>
                         </div>
 
