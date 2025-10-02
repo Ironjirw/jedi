@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read the latest insights and news about Rwanda's logistics industry from Ironji.">
+    <title>Article Details — Ironji</title>
+
+    <style>
+        @font-face {
+            font-family: 'Avenir';
+            src: local('Avenir Next'), local('Avenir'), local('Century Gothic'), local('AppleGothic'), local('sans-serif');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --accent: #FF7F1F;
+            --accent-dark: #E56710;
+            --accent-light: #FFB880;
+            --black: #000000;
+            --dark-gray: #1C1C1C;
+            --gray: #666666;
+            --light-gray: #999999;
+            --off-white: #F8F8F8;
+            --white: #FFFFFF;
+            --success: #10B981;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            color: var(--dark-gray);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--white);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            padding: 1.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.7;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: color 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .dropdown-arrow {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            margin-left: 0.35rem;
+            margin-bottom: 2px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .dropdown-arrow {
+            transform: rotate(-45deg) translateY(-2px);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 280px;
+            padding: 0.75rem 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 1rem;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dropdown-item:hover {
+            background: var(--off-white);
+            border-left-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .dropdown-item-icon {
+            margin-right: 0.75rem;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .dropdown-item-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.75rem;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 127, 31, 0.2);
+        }
+
+        .nav-cta::after {
+            display: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--dark-gray);
+            transition: all 0.3s ease;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding-top: 8rem;
+            padding-bottom: 2rem;
+            background: var(--off-white);
+        }
+
+        .breadcrumb-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .breadcrumb-link {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb-link:hover {
+            color: var(--accent);
+        }
+
+        .breadcrumb-separator {
+            color: var(--light-gray);
+        }
+
+        .breadcrumb-current {
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        /* Article Header */
+        .article-header {
+            padding: 3rem 0;
+            background: var(--off-white);
+        }
+
+        .article-header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-category-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-header-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--black);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            color: var(--gray);
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .article-meta-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .author-info {
+            flex: 1;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 0.25rem;
+        }
+
+        .author-title {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* Featured Image */
+        .featured-image {
+            padding: 0;
+            background: var(--white);
+        }
+
+        .featured-image-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(255, 127, 31, 0.1) 0%, rgba(255, 127, 31, 0.05) 100%);
+        }
+
+        /* Article Content */
+        .article-content-section {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .article-content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .article-content {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--dark-gray);
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .article-content blockquote {
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: var(--off-white);
+            border-left: 5px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--dark-gray);
+        }
+
+        .article-content .highlight-box {
+            margin: 2.5rem 0;
+            padding: 2rem;
+            background: rgba(255, 127, 31, 0.05);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 127, 31, 0.2);
+        }
+
+        .article-content .highlight-box h4 {
+            color: var(--accent);
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Share Section */
+        .share-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .share-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--off-white);
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .share-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        /* Related Articles */
+        .related-articles {
+            padding: 5rem 0;
+            background: var(--off-white);
+        }
+
+        .related-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .related-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .related-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .related-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(255, 127, 31, 0.1) 0%, rgba(255, 127, 31, 0.05) 100%);
+        }
+
+        .related-content {
+            padding: 1.5rem;
+        }
+
+        .related-category {
+            display: inline-block;
+            padding: 0.35rem 0.9rem;
+            background: rgba(255, 127, 31, 0.1);
+            color: var(--accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .related-card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .related-excerpt {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: var(--black, #000000);
+            color: var(--white, #FFFFFF);
+            padding: 5rem 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent, #FF7F1F);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent, #FF7F1F);
+            border-color: var(--accent, #FF7F1F);
+            color: var(--white, #FFFFFF);
+        }
+
+        /* Mobile Click-to-Call Button */
+        .mobile-call-btn {
+            display: none;
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--accent, #FF7F1F);
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(255, 127, 31, 0.4);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            text-decoration: none;
+            color: var(--white, #FFFFFF);
+            font-size: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(255, 127, 31, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(255, 127, 31, 0.7);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .breadcrumb {
+                padding-top: 6rem;
+            }
+
+            .article-header-title {
+                font-size: 2rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .featured-image img {
+                height: 300px;
+            }
+
+            .article-content {
+                font-size: 1.05rem;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+
+            .mobile-call-btn {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header id="header">
+        <div class="nav-container">
+            <a href="/" class="logo">IRONJI</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">
+                            Services
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                                </span> Products Distribution
+                            </a>
+                            <a href="#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                </span> Inter-warehouse Transport
+                            </a>
+                            <a href="#services" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m-1 1l-4.2 4.2m13.2-5.2h-6m-6 0H1m13.2 5.2l-4.2-4.2m-1-1L4.8 4.8"/></svg>
+                                </span> Custom Solutions
+                            </a>
+                            <a href="#schedule" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </span> Schedule & Prices
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="track.html" class="nav-link">Track Shipment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="quote.html" class="nav-link">Get Instant Quotation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            Company
+                            <span class="dropdown-arrow"></span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="about.html" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                </span> About Us
+                            </a>
+                            <a href="profile.html" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+                                </span> Company Profile
+                            </a>
+                            <a href="news.html" class="dropdown-item">
+                                <span class="dropdown-item-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><line x1="12" y1="7" x2="17" y2="7"/><line x1="12" y1="11" x2="17" y2="11"/></svg>
+                                </span> News & Insights
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="tel:+250784635871" class="nav-link">
+                            <span class="dropdown-item-icon">
+                                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </span> Emergency
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-cta">Contact Us</a>
+                    </li>
+                </ul>
+                <button class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="breadcrumb-container">
+            <nav class="breadcrumb-nav">
+                <a href="/" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="news.html" class="breadcrumb-link">News & Insights</a>
+                <span class="breadcrumb-separator">/</span>
+                <span class="breadcrumb-current" id="breadcrumb-current">Article</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="article-header-container">
+            <div class="article-category-badge" id="article-category">Industry Trends</div>
+            <h1 class="article-header-title" id="article-title">Rwanda's Logistics Sector: 2025 Growth Outlook</h1>
+            <div class="article-meta">
+                <span class="article-meta-item">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <span id="article-date">January 15, 2025</span>
+                </span>
+                <span class="article-meta-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span id="article-read-time">5 min read</span>
+                </span>
+                <span class="article-meta-item">
+                    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <span id="article-author-name">Ironji Team</span>
+                </span>
+            </div>
+            <div class="article-author">
+                <div class="author-avatar">IT</div>
+                <div class="author-info">
+                    <div class="author-name">Ironji Team</div>
+                    <div class="author-title">Logistics Industry Experts</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Image -->
+    <section class="featured-image">
+        <div class="featured-image-container">
+            <img src="" alt="Article Featured Image" style="background: linear-gradient(135deg, rgba(255, 127, 31, 0.1) 0%, rgba(255, 127, 31, 0.05) 100%);">
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="article-content-section">
+        <div class="article-content-container">
+            <div class="article-content" id="article-body">
+                <p>
+                    As Rwanda positions itself as East Africa's logistics hub, industry experts predict significant growth driven by digital transformation and infrastructure development. The sector is experiencing unprecedented momentum as the country continues to strengthen its position as a gateway to the East African market.
+                </p>
+
+                <h2>Digital Transformation Leading the Way</h2>
+                <p>
+                    The integration of advanced technologies such as artificial intelligence, IoT sensors, and blockchain is revolutionizing how logistics companies operate in Rwanda. These innovations are enabling real-time tracking, predictive maintenance, and more efficient route planning, resulting in cost savings of up to 25% for businesses.
+                </p>
+
+                <p>
+                    Major logistics providers are investing heavily in digital infrastructure, with some companies reporting that their technology investments have already yielded returns of over 200% in operational efficiency gains.
+                </p>
+
+                <div class="highlight-box">
+                    <h4>Key Industry Statistics</h4>
+                    <ul>
+                        <li>35% projected growth in logistics sector by 2026</li>
+                        <li>60% reduction in border crossing times due to digital customs</li>
+                        <li>$500M+ in planned infrastructure investments</li>
+                        <li>2,000+ new jobs expected in the logistics sector</li>
+                    </ul>
+                </div>
+
+                <h2>Infrastructure Development Driving Growth</h2>
+                <p>
+                    Rwanda's commitment to developing world-class logistics infrastructure is paying dividends. The expansion of warehouse facilities, improvement of road networks, and enhancement of border crossing points are creating new opportunities for both domestic and international logistics companies.
+                </p>
+
+                <p>
+                    The Kigali Logistics Platform, set to be completed by mid-2025, will provide state-of-the-art warehousing and distribution facilities equipped with advanced automation systems. This mega-project is expected to handle over 500,000 tons of cargo annually, significantly boosting the country's logistics capacity.
+                </p>
+
+                <blockquote>
+                    "Rwanda's strategic location, combined with its business-friendly policies and modern infrastructure, makes it the ideal logistics hub for the East African region." - Industry Expert
+                </blockquote>
+
+                <h3>Sustainability at the Core</h3>
+                <p>
+                    Environmental sustainability is becoming a central focus for Rwanda's logistics sector. Companies are increasingly adopting green practices, from electric vehicle fleets to solar-powered warehouses. The government's ambitious target of achieving carbon neutrality by 2050 is driving innovation in sustainable logistics solutions.
+                </p>
+
+                <h2>Looking Ahead</h2>
+                <p>
+                    The outlook for Rwanda's logistics sector in 2025 and beyond is exceptionally positive. With continued investment in technology, infrastructure, and human capital, the industry is well-positioned to meet the growing demands of regional and international trade.
+                </p>
+
+                <p>
+                    As digital adoption accelerates and infrastructure projects come online, industry analysts predict that Rwanda will solidify its position as East Africa's premier logistics destination, creating thousands of jobs and contributing significantly to the nation's economic growth.
+                </p>
+            </div>
+
+            <!-- Share Section -->
+            <div class="share-section">
+                <h3 class="share-title">Share this article</h3>
+                <div class="share-buttons">
+                    <a href="#" class="share-btn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" style="stroke: currentColor; fill: none; stroke-width: 2;">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                        Facebook
+                    </a>
+                    <a href="#" class="share-btn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" style="stroke: currentColor; fill: none; stroke-width: 2;">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                        Twitter
+                    </a>
+                    <a href="#" class="share-btn">
+                        <svg viewBox="0 0 24 24" width="18" height="18" style="stroke: currentColor; fill: none; stroke-width: 2;">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="related-articles">
+        <div class="related-container">
+            <h2 class="related-title">Related Articles</h2>
+            <div class="related-grid">
+                <a href="article-details.html?id=2" class="related-card">
+                    <div class="related-image"></div>
+                    <div class="related-content">
+                        <div class="related-category">Technology</div>
+                        <h3 class="related-card-title">AI-Powered Route Optimization in Kigali</h3>
+                        <p class="related-excerpt">
+                            How artificial intelligence is revolutionizing delivery routes in Rwanda's capital.
+                        </p>
+                    </div>
+                </a>
+                <a href="article-details.html?id=3" class="related-card">
+                    <div class="related-image"></div>
+                    <div class="related-content">
+                        <div class="related-category">Sustainability</div>
+                        <h3 class="related-card-title">Electric Vehicles Transform Rwanda's Logistics</h3>
+                        <p class="related-excerpt">
+                            Rwanda leads East Africa in adopting electric vehicles for logistics operations.
+                        </p>
+                    </div>
+                </a>
+                <a href="article-details.html?id=5" class="related-card">
+                    <div class="related-image"></div>
+                    <div class="related-content">
+                        <div class="related-category">Case Study</div>
+                        <h3 class="related-card-title">How Ironji Reduced Delivery Times by 35%</h3>
+                        <p class="related-excerpt">
+                            A deep dive into our smart warehouse management systems implementation.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>IRONJI</h3>
+                <p>Revolutionizing logistics in Rwanda with innovative solutions,
+                   unmatched reliability, and a commitment to excellence since 2018.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="/about.html">About Us</a></li>
+                    <li><a href="/track.html">Track Shipment</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Distribution</a></li>
+                    <li><a href="#">Warehousing</a></li>
+                    <li><a href="#">On Demand Transport</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:ironji.sales@gmail.com">ironji.sales@gmail.com</a></li>
+                    <li><a href="tel:+250784635871">+250 784 635 871</a></li>
+                    <li><a href="#">Kigali, Rwanda</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2018 - 2025 Ironji. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">f</a>
+                <a href="#" class="social-link">𝕏</a>
+                <a href="#" class="social-link">in</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Click-to-Call Button -->
+    <a href="tel:+250784635871" class="mobile-call-btn" title="Call Us Now">
+        <svg viewBox="0 0 24 24" width="28" height="28" style="stroke: white; fill: none; stroke-width: 2;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    </a>
+
+    <script>
+        // Article data for different IDs
+        const articles = {
+            1: {
+                category: 'Industry Trends',
+                title: "Rwanda's Logistics Sector: 2025 Growth Outlook",
+                date: 'January 15, 2025',
+                readTime: '5 min read',
+                author: 'Ironji Team',
+                body: `
+                    <p>As Rwanda positions itself as East Africa's logistics hub, industry experts predict significant growth driven by digital transformation and infrastructure development. The sector is experiencing unprecedented momentum as the country continues to strengthen its position as a gateway to the East African market.</p>
+
+                    <h2>Digital Transformation Leading the Way</h2>
+                    <p>The integration of advanced technologies such as artificial intelligence, IoT sensors, and blockchain is revolutionizing how logistics companies operate in Rwanda. These innovations are enabling real-time tracking, predictive maintenance, and more efficient route planning, resulting in cost savings of up to 25% for businesses.</p>
+
+                    <p>Major logistics providers are investing heavily in digital infrastructure, with some companies reporting that their technology investments have already yielded returns of over 200% in operational efficiency gains.</p>
+
+                    <div class="highlight-box">
+                        <h4>Key Industry Statistics</h4>
+                        <ul>
+                            <li>35% projected growth in logistics sector by 2026</li>
+                            <li>60% reduction in border crossing times due to digital customs</li>
+                            <li>$500M+ in planned infrastructure investments</li>
+                            <li>2,000+ new jobs expected in the logistics sector</li>
+                        </ul>
+                    </div>
+
+                    <h2>Infrastructure Development Driving Growth</h2>
+                    <p>Rwanda's commitment to developing world-class logistics infrastructure is paying dividends. The expansion of warehouse facilities, improvement of road networks, and enhancement of border crossing points are creating new opportunities for both domestic and international logistics companies.</p>
+
+                    <p>The Kigali Logistics Platform, set to be completed by mid-2025, will provide state-of-the-art warehousing and distribution facilities equipped with advanced automation systems. This mega-project is expected to handle over 500,000 tons of cargo annually, significantly boosting the country's logistics capacity.</p>
+
+                    <blockquote>"Rwanda's strategic location, combined with its business-friendly policies and modern infrastructure, makes it the ideal logistics hub for the East African region." - Industry Expert</blockquote>
+
+                    <h3>Sustainability at the Core</h3>
+                    <p>Environmental sustainability is becoming a central focus for Rwanda's logistics sector. Companies are increasingly adopting green practices, from electric vehicle fleets to solar-powered warehouses. The government's ambitious target of achieving carbon neutrality by 2050 is driving innovation in sustainable logistics solutions.</p>
+
+                    <h2>Looking Ahead</h2>
+                    <p>The outlook for Rwanda's logistics sector in 2025 and beyond is exceptionally positive. With continued investment in technology, infrastructure, and human capital, the industry is well-positioned to meet the growing demands of regional and international trade.</p>
+
+                    <p>As digital adoption accelerates and infrastructure projects come online, industry analysts predict that Rwanda will solidify its position as East Africa's premier logistics destination, creating thousands of jobs and contributing significantly to the nation's economic growth.</p>
+                `
+            },
+            2: {
+                category: 'Technology',
+                title: 'AI-Powered Route Optimization in Kigali',
+                date: 'January 12, 2025',
+                readTime: '7 min read',
+                author: 'Ironji Team',
+                body: `
+                    <p>Artificial intelligence is transforming the logistics landscape in Kigali, with advanced route optimization algorithms reducing delivery times by up to 30% while significantly cutting fuel costs. This technological revolution is reshaping how goods move through Rwanda's capital city.</p>
+
+                    <h2>The Challenge of Urban Logistics</h2>
+                    <p>Kigali's rapid urbanization has created unique challenges for logistics providers. Traffic congestion, varying road conditions, and dynamic delivery schedules require intelligent solutions that can adapt in real-time to changing circumstances.</p>
+
+                    <h2>How AI Makes the Difference</h2>
+                    <p>Machine learning algorithms analyze historical traffic patterns, weather conditions, vehicle performance data, and delivery priorities to calculate the most efficient routes. The system continuously learns and improves, becoming more accurate with each delivery.</p>
+
+                    <div class="highlight-box">
+                        <h4>AI Route Optimization Benefits</h4>
+                        <ul>
+                            <li>30% reduction in average delivery times</li>
+                            <li>25% decrease in fuel consumption</li>
+                            <li>40% improvement in on-time deliveries</li>
+                            <li>Real-time route adjustments based on traffic conditions</li>
+                        </ul>
+                    </div>
+
+                    <p>As AI technology continues to evolve, Rwanda's logistics sector is well-positioned to leverage these advancements for even greater efficiency gains in the future.</p>
+                `
+            },
+            3: {
+                category: 'Sustainability',
+                title: "Electric Vehicles Transform Rwanda's Logistics",
+                date: 'January 10, 2025',
+                readTime: '6 min read',
+                author: 'Ironji Team',
+                body: `
+                    <p>Rwanda is leading East Africa in the adoption of electric vehicles for logistics operations, with major companies committing to zero-emission fleets by 2030. This green revolution is transforming the logistics industry while contributing to the country's environmental goals.</p>
+
+                    <h2>The Green Logistics Revolution</h2>
+                    <p>Electric vehicle adoption in Rwanda's logistics sector is accelerating at an unprecedented pace. With government incentives, improving charging infrastructure, and declining EV costs, the business case for electric logistics vehicles has never been stronger.</p>
+
+                    <h2>Environmental and Economic Impact</h2>
+                    <p>The shift to electric vehicles is delivering both environmental and economic benefits. Companies report fuel cost savings of up to 60% compared to traditional diesel vehicles, while contributing to Rwanda's carbon neutrality goals.</p>
+
+                    <blockquote>"Transitioning to electric vehicles isn't just good for the environment—it's good for business. Our operating costs have decreased significantly while our efficiency has improved." - Logistics Company CEO</blockquote>
+
+                    <div class="highlight-box">
+                        <h4>EV Adoption Progress</h4>
+                        <ul>
+                            <li>500+ electric delivery vehicles on Rwanda's roads</li>
+                            <li>60% reduction in fuel costs for EV fleet operators</li>
+                            <li>75% decrease in carbon emissions per delivery</li>
+                            <li>200+ charging stations planned for 2025</li>
+                        </ul>
+                    </div>
+
+                    <p>As infrastructure continues to expand and technology improves, electric vehicles are set to become the standard for logistics operations across Rwanda.</p>
+                `
+            }
+        };
+
+        // Get article ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id') || '1';
+
+        // Load article content
+        const article = articles[articleId] || articles[1];
+        document.getElementById('article-category').textContent = article.category;
+        document.getElementById('article-title').textContent = article.title;
+        document.getElementById('article-date').textContent = article.date;
+        document.getElementById('article-read-time').textContent = article.readTime;
+        document.getElementById('article-author-name').textContent = article.author;
+        document.getElementById('article-body').innerHTML = article.body;
+        document.getElementById('breadcrumb-current').textContent = article.title.substring(0, 30) + '...';
+
+        // Update page title
+        document.title = article.title + ' — Ironji';
+    </script>
+</body>
+</html>
