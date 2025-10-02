@@ -656,47 +656,232 @@
 
         .map-placeholder {
             width: 100%;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(255, 127, 31, 0.05) 0%, rgba(255, 127, 31, 0.02) 100%);
+            min-height: 600px;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
             border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
             overflow: hidden;
+            padding: 3rem;
         }
 
         .map-placeholder::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            background: var(--accent);
-            opacity: 0.1;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 127, 31, 0.15) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .map-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
             border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         .map-content {
-            text-align: center;
-            z-index: 1;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
         }
 
-        .map-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
+        .map-visual {
+            position: relative;
+        }
+
+        .rwanda-outline {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .rwanda-map-svg {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 10px 40px rgba(255, 127, 31, 0.3));
+        }
+
+        .province-region {
+            fill: rgba(255, 127, 31, 0.1);
             stroke: var(--accent);
-            fill: none;
-            stroke-width: 1.5;
+            stroke-width: 2;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .map-text {
-            font-size: 1.25rem;
-            color: var(--gray);
-            max-width: 400px;
+        .province-region:hover {
+            fill: rgba(255, 127, 31, 0.3);
+            stroke-width: 3;
+        }
+
+        .coverage-pulse {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 127, 31, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 127, 31, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 127, 31, 0);
+            }
+        }
+
+        .map-info {
+            color: white;
+        }
+
+        .map-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .map-title .accent {
+            color: var(--accent);
+        }
+
+        .map-description {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .coverage-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .districts-list {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .districts-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .districts-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .districts-list::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 10px;
+        }
+
+        .province-group {
+            margin-bottom: 2rem;
+        }
+
+        .province-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .province-name {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .province-name::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .district-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .district-item {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .district-item:hover {
+            background: rgba(255, 127, 31, 0.2);
+            color: white;
+            transform: translateX(5px);
         }
 
         /* No Results */
@@ -892,7 +1077,21 @@
             }
 
             .map-placeholder {
-                height: 350px;
+                min-height: 500px;
+                padding: 2rem;
+            }
+
+            .map-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .districts-list {
+                max-height: 300px;
+            }
+
+            .district-grid {
+                grid-template-columns: 1fr;
             }
 
             .footer-content {
@@ -1119,13 +1318,124 @@
             </div>
             <div class="map-container">
                 <div class="map-placeholder">
+                    <!-- Starfield Background -->
+                    <div class="map-stars" id="stars-container"></div>
+
                     <div class="map-content">
-                        <svg class="map-icon" viewBox="0 0 24 24">
-                            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
-                            <line x1="8" y1="2" x2="8" y2="18"/>
-                            <line x1="16" y1="6" x2="16" y2="22"/>
-                        </svg>
-                        <p class="map-text">Interactive route map displaying our coverage across Rwanda</p>
+                        <!-- Map Visual -->
+                        <div class="map-visual">
+                            <div class="rwanda-outline">
+                                <svg class="rwanda-map-svg" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Simplified Rwanda outline with provinces -->
+                                    <!-- Northern Province -->
+                                    <path class="province-region" d="M 180 50 L 220 50 L 250 80 L 240 120 L 200 110 L 160 100 L 150 70 Z" data-province="Northern"/>
+
+                                    <!-- Kigali Province (center) -->
+                                    <circle class="province-region" cx="200" cy="180" r="30" data-province="Kigali"/>
+                                    <circle class="coverage-pulse" cx="200" cy="180" r="5" style="left: 50%; top: 36%; transform: translate(-50%, -50%);"/>
+
+                                    <!-- Eastern Province -->
+                                    <path class="province-region" d="M 230 150 L 320 140 L 340 180 L 330 250 L 280 240 L 240 220 L 230 180 Z" data-province="Eastern"/>
+
+                                    <!-- Southern Province -->
+                                    <path class="province-region" d="M 160 210 L 250 230 L 260 300 L 240 360 L 180 380 L 120 350 L 130 280 L 150 240 Z" data-province="Southern"/>
+
+                                    <!-- Western Province -->
+                                    <path class="province-region" d="M 60 140 L 150 150 L 160 200 L 140 260 L 120 340 L 70 320 L 50 240 L 60 180 Z" data-province="Western"/>
+
+                                    <!-- Connection lines -->
+                                    <line x1="200" y1="180" x2="180" y2="80" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <line x1="200" y1="180" x2="280" y2="190" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <line x1="200" y1="180" x2="200" y2="300" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+                                    <line x1="200" y1="180" x2="100" y2="220" stroke="rgba(255, 127, 31, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Map Info -->
+                        <div class="map-info">
+                            <h3 class="map-title">
+                                Complete <span class="accent">Rwanda Coverage</span>
+                            </h3>
+                            <p class="map-description">
+                                We proudly serve all 30 districts across Rwanda's 5 provinces, ensuring your cargo reaches every corner of the nation with reliability and efficiency.
+                            </p>
+
+                            <!-- Coverage Stats -->
+                            <div class="coverage-stats">
+                                <div class="stat-card">
+                                    <div class="stat-number">5</div>
+                                    <div class="stat-label">Provinces</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">30</div>
+                                    <div class="stat-label">Districts</div>
+                                </div>
+                            </div>
+
+                            <!-- Districts List -->
+                            <div class="districts-list">
+                                <div class="province-group">
+                                    <div class="province-name">Kigali Province</div>
+                                    <div class="district-grid">
+                                        <div class="district-item">Gasabo</div>
+                                        <div class="district-item">Kicukiro</div>
+                                        <div class="district-item">Nyarugenge</div>
+                                    </div>
+                                </div>
+
+                                <div class="province-group">
+                                    <div class="province-name">Northern Province</div>
+                                    <div class="district-grid">
+                                        <div class="district-item">Burera</div>
+                                        <div class="district-item">Gakenke</div>
+                                        <div class="district-item">Gicumbi</div>
+                                        <div class="district-item">Musanze</div>
+                                        <div class="district-item">Rulindo</div>
+                                    </div>
+                                </div>
+
+                                <div class="province-group">
+                                    <div class="province-name">Eastern Province</div>
+                                    <div class="district-grid">
+                                        <div class="district-item">Bugesera</div>
+                                        <div class="district-item">Gatsibo</div>
+                                        <div class="district-item">Kayonza</div>
+                                        <div class="district-item">Kirehe</div>
+                                        <div class="district-item">Ngoma</div>
+                                        <div class="district-item">Nyagatare</div>
+                                        <div class="district-item">Rwamagana</div>
+                                    </div>
+                                </div>
+
+                                <div class="province-group">
+                                    <div class="province-name">Southern Province</div>
+                                    <div class="district-grid">
+                                        <div class="district-item">Gisagara</div>
+                                        <div class="district-item">Huye</div>
+                                        <div class="district-item">Kamonyi</div>
+                                        <div class="district-item">Muhanga</div>
+                                        <div class="district-item">Nyamagabe</div>
+                                        <div class="district-item">Nyanza</div>
+                                        <div class="district-item">Nyaruguru</div>
+                                        <div class="district-item">Ruhango</div>
+                                    </div>
+                                </div>
+
+                                <div class="province-group">
+                                    <div class="province-name">Western Province</div>
+                                    <div class="district-grid">
+                                        <div class="district-item">Karongi</div>
+                                        <div class="district-item">Ngororero</div>
+                                        <div class="district-item">Nyabihu</div>
+                                        <div class="district-item">Nyamasheke</div>
+                                        <div class="district-item">Rubavu</div>
+                                        <div class="district-item">Rusizi</div>
+                                        <div class="district-item">Rutsiro</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1441,8 +1751,37 @@
             }
         });
 
+        // Create starfield animation
+        function createStarfield() {
+            const starsContainer = document.getElementById('stars-container');
+            if (!starsContainer) return;
+
+            const numStars = 100;
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Province hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const provinces = document.querySelectorAll('.province-region');
+            provinces.forEach(province => {
+                province.addEventListener('mouseenter', function() {
+                    const provinceName = this.getAttribute('data-province');
+                    console.log('Hovering over:', provinceName);
+                });
+            });
+        });
+
         // Initialize - display all routes on load
         displayRoutes(allRoutes);
+        createStarfield();
     </script>
 </body>
 </html>
