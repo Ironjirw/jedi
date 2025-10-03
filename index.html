@@ -1080,6 +1080,146 @@
             fill: none;
         }
 
+        /* Live Shipments Ticker */
+        .shipments-ticker {
+            background: var(--dark-gray);
+            padding: 1.5rem 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 2px solid var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .ticker-label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: scroll-left 60s linear infinite;
+            width: fit-content;
+        }
+
+        .ticker-wrapper:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .ticker-track {
+            display: flex;
+            gap: 2rem;
+            padding-left: 2rem;
+        }
+
+        .shipment-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 127, 31, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .shipment-item:hover {
+            background: rgba(255, 127, 31, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .shipment-icon {
+            font-size: 1.5rem;
+        }
+
+        .shipment-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .shipment-route {
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .shipment-route .arrow {
+            color: var(--accent);
+            margin: 0 0.5rem;
+        }
+
+        .shipment-details {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .shipment-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+
+        .shipment-detail-icon {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .shipment-status {
+            padding: 0.25rem 0.75rem;
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .shipment-book-cta {
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .shipment-book-cta:hover {
+            background: var(--accent-dark);
+            transform: scale(1.05);
+        }
+
         /* Benefits Section */
         .benefits {
             padding: 5rem 3rem;
@@ -2464,6 +2604,30 @@
                 flex-direction: column;
             }
 
+            .ticker-label {
+                position: relative;
+                display: block;
+                margin-bottom: 1rem;
+                text-align: center;
+            }
+
+            .shipment-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .shipment-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .shipment-book-cta {
+                margin-left: 0;
+                width: 100%;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -2702,6 +2866,196 @@
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </svg>
+        </div>
+    </section>
+
+    <!-- Live Shipments Ticker -->
+    <section class="shipments-ticker">
+        <!-- <div class="ticker-label">🚚 LIVE SHIPMENTS</div> -->
+        <div class="ticker-wrapper">
+            <div class="ticker-track">
+                <div class="shipment-item">
+                    <div class="shipment-icon">📦</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Kigali <span class="arrow">→</span> Huye</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 3 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Kigali', 'Huye')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">🚛</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Musanze <span class="arrow">→</span> Kigali</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 2 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Musanze', 'Kigali')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">📦</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Rubavu <span class="arrow">→</span> Kigali</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 4 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Rubavu', 'Kigali')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">🚚</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Kigali <span class="arrow">→</span> Rwamagana</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 1.5 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Kigali', 'Rwamagana')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">📦</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Nyanza <span class="arrow">→</span> Kigali</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 2.5 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Nyanza', 'Kigali')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">🚛</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Kigali <span class="arrow">→</span> Rusizi</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 5 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Kigali', 'Rusizi')">Book Return Trip</button>
+                </div>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-track">
+                <div class="shipment-item">
+                    <div class="shipment-icon">📦</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Kigali <span class="arrow">→</span> Huye</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 3 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Kigali', 'Huye')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">🚛</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Musanze <span class="arrow">→</span> Kigali</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 2 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Musanze', 'Kigali')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">📦</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Rubavu <span class="arrow">→</span> Kigali</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 4 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Rubavu', 'Kigali')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">🚚</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Kigali <span class="arrow">→</span> Rwamagana</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 1.5 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Kigali', 'Rwamagana')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">📦</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Nyanza <span class="arrow">→</span> Kigali</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 2.5 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Nyanza', 'Kigali')">Book Return Trip</button>
+                </div>
+
+                <div class="shipment-item">
+                    <div class="shipment-icon">🚛</div>
+                    <div class="shipment-info">
+                        <div class="shipment-route">Kigali <span class="arrow">→</span> Rusizi</div>
+                        <div class="shipment-details">
+                            <div class="shipment-detail">
+                                <span class="shipment-detail-icon">⏱</span>
+                                <span>Returns in 5 hrs</span>
+                            </div>
+                            <span class="shipment-status">In Transit</span>
+                        </div>
+                    </div>
+                    <button class="shipment-book-cta" onclick="openQuoteModal('Kigali', 'Rusizi')">Book Return Trip</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -3434,6 +3788,14 @@
         function closeDriverAppModal() {
             document.getElementById('driverAppModal').classList.remove('active');
             document.body.style.overflow = '';
+        }
+
+        // Quote modal for shipment bookings
+        function openQuoteModal(from, to) {
+            // For now, scroll to contact section or open email
+            const subject = encodeURIComponent(`Book Return Trip: ${to} to ${from}`);
+            const body = encodeURIComponent(`Hi Ironji Team,\n\nI'd like to book a return trip shipment from ${to} to ${from}.\n\nPlease provide a quote.\n\nThank you!`);
+            window.location.href = `mailto:ironji.sales@gmail.com?subject=${subject}&body=${body}`;
         }
 
         // Close modal when clicking outside
