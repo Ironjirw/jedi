@@ -2307,6 +2307,64 @@
             color: var(--gray);
         }
 
+        /* Driver App Modal */
+        .app-download-options {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .app-store-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: transparent;
+            color: var(--accent);
+            text-decoration: none;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .app-store-btn:hover {
+            background: var(--accent);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 127, 31, 0.3);
+        }
+
+        .app-store-icon {
+            font-size: 2rem;
+        }
+
+        .app-store-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .app-store-text small {
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .app-store-text strong {
+            font-size: 1.1rem;
+        }
+
+        .driver-app-modal-description {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
         /* Mobile Click-to-Call Button */
         .mobile-call-btn {
             display: none;
@@ -2399,6 +2457,10 @@
             }
 
             .benefit-actions {
+                flex-direction: column;
+            }
+
+            .app-download-options {
                 flex-direction: column;
             }
 
@@ -3327,6 +3389,68 @@
         }
     </script>
 
-    
+    <!-- Driver App Download Modal -->
+    <div id="driverAppModal" class="lead-modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="modal-close" onclick="closeDriverAppModal()">&times;</button>
+            <div class="modal-header">
+                <div class="modal-tag">Join 900+ Drivers</div>
+                <h3>Start Earning More Today</h3>
+            </div>
+
+            <p class="driver-app-modal-description">
+                Download the Ironji Driver App and get instant access to thousands of high-paying loads across Rwanda. Choose your schedule, maximize your earnings, and join Rwanda's fastest-growing driver network.
+            </p>
+
+            <div class="app-download-options">
+                <a href="https://play.google.com/store" target="_blank" class="app-store-btn">
+                    <span class="app-store-icon">▶</span>
+                    <div class="app-store-text">
+                        <small>GET IT ON</small>
+                        <strong>Google Play</strong>
+                    </div>
+                </a>
+                <a href="https://apps.apple.com" target="_blank" class="app-store-btn">
+                    <span class="app-store-icon">🍎</span>
+                    <div class="app-store-text">
+                        <small>Download on the</small>
+                        <strong>App Store</strong>
+                    </div>
+                </a>
+            </div>
+
+            <div class="modal-footer">
+                Free to download • Start earning immediately
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openDriverAppModal() {
+            document.getElementById('driverAppModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDriverAppModal() {
+            document.getElementById('driverAppModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('driverAppModal')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDriverAppModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDriverAppModal();
+            }
+        });
+    </script>
+
+
 </body>
 </html>
