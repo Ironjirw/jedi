@@ -1080,6 +1080,197 @@
             fill: none;
         }
 
+        /* Benefits Section */
+        .benefits {
+            padding: 5rem 3rem;
+            background: var(--white);
+            position: relative;
+        }
+
+        .benefits-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, var(--off-white) 0%, #FFFFFF 100%);
+            border-radius: 12px;
+            padding: 3.5rem 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-light) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(255, 127, 31, 0.15);
+        }
+
+        .benefit-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .benefit-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(255, 127, 31, 0.1);
+            color: var(--accent);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            align-self: center;
+            width: fit-content;
+        }
+
+        .benefit-card h3 {
+            font-family: 'Avenir', 'Avenir Next', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 1.25rem;
+            line-height: 1.3;
+        }
+
+        .benefit-card p {
+            color: var(--gray);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            flex-grow: 1;
+        }
+
+        .benefit-features li {
+            padding: 0.75rem 0;
+            color: var(--dark-gray);
+            font-size: 1rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 0.75rem;
+            align-items: start;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .benefit-features li:last-child {
+            border-bottom: none;
+        }
+
+        .benefit-features li::before {
+            content: '✓';
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            line-height: 1;
+            padding-top: 0.15rem;
+        }
+
+        .benefit-feature-label {
+            font-weight: 600;
+            color: var(--black);
+        }
+
+        .benefit-feature-desc {
+            color: var(--gray);
+        }
+
+        .benefit-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .benefit-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 127, 31, 0.3);
+            flex: 1;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .benefit-cta:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 127, 31, 0.4);
+        }
+
+        .benefit-cta::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-cta:hover::after {
+            transform: translateX(5px);
+        }
+
+        .benefit-highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .benefit-app-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            text-align: center;
+            flex: 1;
+        }
+
+        .benefit-app-badge::before {
+            content: '📱';
+            font-size: 1.2rem;
+        }
+
         /* Stats Section */
         .stats {
             padding: 7rem 3rem;
@@ -2199,6 +2390,18 @@
                 grid-template-columns: 1fr;
             }
 
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefit-card {
+                padding: 2.5rem 2rem;
+            }
+
+            .benefit-actions {
+                flex-direction: column;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -2437,6 +2640,89 @@
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
             </svg>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="benefits-container">
+            <div class="benefits-grid">
+                <!-- Business Card -->
+                <div class="benefit-card fade-in">
+                    <span class="benefit-badge">For Businesses</span>
+                    <h3>Ship Smarter, Save More, Scale Faster</h3>
+                    <p>Stop overpaying for unreliable logistics. Get <span class="benefit-highlight">instant quotes</span>, transparent pricing, and deliveries in <span class="benefit-highlight">under 3 hours</span> across Rwanda.</p>
+
+                    <ul class="benefit-features">
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">30M+ tons</span>
+                                <span class="benefit-feature-desc"> transported—trust Rwanda's proven logistics leader</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">Real-time tracking</span>
+                                <span class="benefit-feature-desc"> so you always know where your cargo is</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">Flexible solutions</span>
+                                <span class="benefit-feature-desc"> —from single packages to full warehouse distribution</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">Zero surprises</span>
+                                <span class="benefit-feature-desc"> with upfront pricing and dedicated support</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="benefit-actions">
+                        <a href="quote.html" class="benefit-cta">Get Your Free Instant Quotation</a>
+                    </div>
+                </div>
+
+                <!-- Truck Owner/Driver Card -->
+                <div class="benefit-card fade-in">
+                    <span class="benefit-badge">For Truck Owners & Drivers</span>
+                    <h3>Turn Empty Miles Into Profit</h3>
+                    <p>Join <span class="benefit-highlight">900+ professional drivers</span> earning more with consistent, high-paying loads across Rwanda. No more waiting—start hauling today.</p>
+
+                    <ul class="benefit-features">
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">Daily opportunities</span>
+                                <span class="benefit-feature-desc"> —access thousands of shipments ready to move</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">Get paid faster</span>
+                                <span class="benefit-feature-desc"> with reliable, on-time payments</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">Your truck, your schedule</span>
+                                <span class="benefit-feature-desc"> —choose loads that fit your route</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <span class="benefit-feature-label">Premium clients</span>
+                                <span class="benefit-feature-desc"> —work with Rwanda's top manufacturers & traders</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="benefit-actions">
+                        <button class="benefit-cta" onclick="openDriverAppModal()">Download Driver App</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
